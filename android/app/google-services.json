@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "390843809269",
+    "firebase_url": "https://awesome-project-a3d4b.firebaseio.com",
+    "project_id": "awesome-project-a3d4b",
+    "storage_bucket": "awesome-project-a3d4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390843809269:android:17e85b5af235e110f9b4bc",
+        "android_client_info": {
+          "package_name": "co.MarcosMarques.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390843809269-o6h32a5spr4esvpfedfj67pic2035l3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR-R7v__0zl-JDLRfbodVPvgpMGimN-Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390843809269-o6h32a5spr4esvpfedfj67pic2035l3d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

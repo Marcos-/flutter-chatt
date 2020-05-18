@@ -1,11 +1,44 @@
+import 'package:flash_chat/widgets/re_lo_button.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'login_screen.dart';
+import 'registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  static String id = "welcome_screen";
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin {
+
+  AnimationController controller;
+  Animation animation;
+
+  @override
+  void initState(){
+    super.initState();
+    
+    controller = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+      upperBound: 100.0,
+    );
+
+    controller.forward();
+
+    animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.decelerate,
+    );
+
+    controller.addListener(() {
+      setState(() {
+        controller.value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +51,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Container(
-                  child: Image.asset('images/logo.png'),
-                  height: 60.0,
+                Hero(
+                  tag: 'logo',
+                  child: Container(
+                    child: Image.asset('images/logo.png'),
+                    height: 70.0,//controller.value,
+                  ),
                 ),
-                Text(
-                  'Flash Chat',
-                  style: TextStyle(
+                TypewriterAnimatedTextKit(
+                  isRepeatingAnimation: true,
+                  speed: Duration(milliseconds: 300),
+                  text: ['Flash Chat'],
+                  textStyle: TextStyle(
                     fontSize: 45.0,
                     fontWeight: FontWeight.w900,
                   ),
@@ -34,42 +72,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             SizedBox(
               height: 48.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                elevation: 5.0,
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  onPressed: () {
-                    //Go to login screen.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Log In',
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    //Go to registration screen.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                  ),
-                ),
-              ),
-            ),
+            ReLoButton(text: 'Log In', action: (){Navigator.pushNamed(context, LoginScreen.id);}, color: Colors.lightBlueAccent,),
+            ReLoButton(text: 'Registrar', action: (){Navigator.pushNamed(context, RegistrationScreen.id);}, color: Colors.blueAccent),
           ],
         ),
       ),
